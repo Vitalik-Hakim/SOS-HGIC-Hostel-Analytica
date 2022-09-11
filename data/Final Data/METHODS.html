@@ -16,8 +16,15 @@
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
-        // CONFIG HERE
-      };
+apiKey: "AIzaSyDUu__xhKuLzqXnwiDNHvQ66roN6Z_47R0",
+  authDomain: "soshgic-hostel-analytica.firebaseapp.com",
+  databaseURL: "https://soshgic-hostel-analytica-default-rtdb.firebaseio.com",
+  projectId: "soshgic-hostel-analytica",
+  storageBucket: "soshgic-hostel-analytica.appspot.com",
+  messagingSenderId: "532242787174",
+  appId: "1:532242787174:web:fdbef779f67edb733236a7",
+  measurementId: "G-XR5JCEH99T"
+            };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
@@ -81,5 +88,7 @@
       }
       remove_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
     </script>
+    <button onclick='update_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS")''>increase streak</button>
+    <button onclick='update_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS")''> update_lateness</button>
   </body>
 </html>
