@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "chart.js": "^3.9.1",
-    "firebase": "^9.9.2"
-  }
-}
