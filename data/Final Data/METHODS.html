@@ -43,8 +43,22 @@ apiKey: "AIzaSyDUu__xhKuLzqXnwiDNHvQ66roN6Z_47R0",
           .ref(`STUDENTS/${hostel_group}/${student_name}/0/streak`)
           .set(firebase.database.ServerValue.increment(1));
       }
-    //   update_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+      // update_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
 
+      // 
+      function show_streak(student_name, hostel_group) {
+        // First get the current data and add 1
+        console.log(`STUDENTS/${hostel_group}/${student_name}/0/streak`);
+        firebase
+          .database()
+          .ref(`STUDENTS/${hostel_group}/${student_name}/0/streak`)
+          .on("value", (sanpshot) => {
+            console.log("TOtal streak",sanpshot.val())
+            var STREAK_VALUE = sanpshot.val();
+              });
+      }
+      // show_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+ 
       // UPDATE LATENESS : this will increment the lateness by 1 and set streak to 0 :( sad!
 
       function update_lateness(student_name, hostel_group) {
@@ -86,9 +100,10 @@ apiKey: "AIzaSyDUu__xhKuLzqXnwiDNHvQ66roN6Z_47R0",
           .ref(`STUDENTS/${hostel_group}/${student_name}/0`)
           .update(newupdateddata);
       }
-      remove_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+      // remove_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
     </script>
     <button onclick='update_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS")''>increase streak</button>
     <button onclick='update_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS")''> update_lateness</button>
+    <button onclick='show_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS")''> show streak</button>
   </body>
 </html>
