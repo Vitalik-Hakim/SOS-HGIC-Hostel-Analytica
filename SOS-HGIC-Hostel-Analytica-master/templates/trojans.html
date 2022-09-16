@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendance Dashboard | By Code Info</title>
+  <link rel="stylesheet" href="../css/trojans.css" />
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="Final Data/METHODS.html"/>
+</head>
+<body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <div class="container">
+    <nav>
+      <ul>
+        <li><a href="#" class="logo">
+          <img src="../img/logo.png">
+          <span class="nav-item">Admin</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-menorah"></i>
+          <span class="nav-item">Dashboard</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-comment"></i>
+          <span class="nav-item">Message</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-database"></i>
+          <span class="nav-item">Report</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-chart-bar"></i>
+          <span class="nav-item">Attendance</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Setting</span>
+        </a></li>
+
+        <li><a href="../templates/login.html" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
+
+
+    <section class="main">
+      <div class="main-top">
+        <h1>Attendance</h1>
+        <i class="fas fa-user-cog"></i>
+        <input type="text" name="box"  id="myInput" onkeyup='tableSearch()' placeholder="Name">
+      </div>
+      <div class="users">
+        <div class="card">
+          <a href="../templates/spartans.html"><button type="button" id="spartbtn">SPARTANS</button></a>
+        </div>
+        <div class="card">
+          <a href="titans.html"><button type="button" id="spartbtn">TITANS</button></a>
+        </div>
+        <div class="card">
+          <a href="../templates/trojans.html"><button type="button" id="spartbtn">TROJANS</button></a>
+        </div>
+        <div class="card">
+          <a href="../templates/vikings.html"><button type="button" id="spartbtn">VIKINGS</button></a>
+        </div>
+      </div>
+
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Attendance List</h1>
+          <table class="table" id="myTable" data-filter-control="true" data-show-search-clear-button="true">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Hostel Group</th>
+                <th>Hostel</th>
+                <th>Streak</th>
+                <th>Lateness</th>
+              </tr>
+            </thead>
+            <tbody id="tr">
+            <tr>
+              <td>1</td>
+              <td>Doris MWIHAKI</td>
+              <td>MYP4</td>
+              <td>Trojans</td>
+              <td>Nile</td>
+              <td id="ssstreak1"></td>
+              <td><button onclick='update_lateness("Doris MWIHAKI", "TROJANS")'>Late</button></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jude ANNAN</td>
+              <td>MYP4</td>
+              <td>Trojans</td>
+              <td>Nile</td>
+              <td id="ssstreak2"></td>
+              <td><button onclick='update_lateness("Jude ANNAN", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Andrew Nana Kwadwo ASAMOAH BOATENG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak3"></td>
+            <td><button onclick='update_lateness("Andrew Nana Kwadwo ASAMOAH BOATENG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Adomba MORGAN-ASIEDU</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak4"></td>
+            <td><button onclick='update_lateness("Adomba MORGAN-ASIEDU", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Brianna BAMPOE ADDO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak5"></td>
+            <td><button onclick='update_lateness("Brianna BAMPOE ADDO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Nadine Louise WULFF-CAESAR</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak6"></td>
+            <td><button onclick='update_lateness("Nadine Louise WULFF-CAESAR", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Daniella DICKSON</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak7"></td>
+            <td><button onclick='update_lateness("Daniella DICKSON", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Priscilla FREEMAN</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak8"></td>
+            <td><button onclick='update_lateness("Priscilla FREEMAN", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Keli Nana Akua OPPONG-AMPOFO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak9"></td>
+            <td><button onclick='update_lateness("Keli Nana Akua OPPONG-AMPOFO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Jephter FRIMPONG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak10"></td>
+            <td><button onclick='update_lateness("Jephter FRIMPONG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Kwame Boakye BRUKU-BOATENG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak11"></td>
+            <td><button onclick='update_lateness("Kwame Boakye BRUKU-BOATENG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Kojo APPEAGYEI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak12"></td>
+            <td><button onclick='update_lateness("Kojo APPEAGYEI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Innocent GASHEMA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak13"></td>
+            <td><button onclick='update_lateness("Innocent GASHEMA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Ewura Amma Panyin Acquabaa Korantema ANSAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak14"></td>
+            <td><button onclick='update_lateness("Ewura Amma Panyin Acquabaa Korantema ANSAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Seidu KABORE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak15"></td>
+            <td><button onclick='update_lateness("Seidu KABORE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>Talent MOYO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak16"></td>
+            <td><button onclick='update_lateness("Talent MOYO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>Magdaline DARKO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak17"></td>
+            <td><button onclick='update_lateness("Magdaline DARKO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>Asabea OWUSU-KORANTENG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak18"></td>
+            <td><button onclick='update_lateness("Asabea OWUSU-KORANTENG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Lifi Sesi Afua KWETEY</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak19"></td>
+            <td><button onclick='update_lateness("Lifi Sesi Afua KWETEY", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>Flavia NANSANI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak20"></td>
+            <td><button onclick='update_lateness("Flavia NANSANI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>Joseph Jnr Nsuremaya ABOR</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak21"></td>
+            <td><button onclick='update_lateness("Joseph Jnr Nsuremaya ABOR", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>22</td>
+            <td>Robert Kofi Adjei Sika ACKAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak22"></td>
+            <td><button onclick='update_lateness("Robert Kofi Adjei Sika ACKAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>Parfait Leonald NIYONZIMA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak23"></td>
+            <td><button onclick='update_lateness("Parfait Leonald NIYONZIMA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>Ivine Jepkoech KURGAT</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak24"></td>
+            <td><button onclick='update_lateness("Ivine Jepkoech KURGAT", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>25</td>
+            <td>Edith ACCAM</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak25"></td>
+            <td><button onclick='update_lateness("Edith ACCAM", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>26</td>
+            <td>Naa Adjorkor ANANG-LA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak26"></td>
+            <td><button onclick='update_lateness("Naa Adjorkor ANANG-LA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>27</td>
+            <td>Nana Kwasi Opoku AGYEMAN</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak27"></td>
+            <td><button onclick='update_lateness("Nana Kwasi Opoku AGYEMAN", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>28</td>
+            <td>Nana Osafoaa ASUMANG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak28"></td>
+            <td><button onclick='update_lateness("Nana Osafoaa ASUMANG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>29</td>
+            <td>Kofi ANOKURANG-BUDU</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak29"></td>
+            <td><button onclick='update_lateness("Kofi ANOKURANG-BUDU", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>30</td>
+            <td>Joshua Kojo ASAMOAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak30"></td>
+            <td><button onclick='update_lateness("Joshua Kojo ASAMOAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>31</td>
+            <td>Tony Odhiambo KERE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak31"></td>
+            <td><button onclick='update_lateness("Tony Odhiambo KERE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>32</td>
+            <td>Wiredu OBENG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak32"></td>
+            <td><button onclick='update_lateness("Wiredu OBENG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>33</td>
+            <td>Sandra NAMAGANDA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak33"></td>
+            <td><button onclick='update_lateness("Sandra NAMAGANDA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>34</td>
+            <td>Kokui SELORMEY</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak34"></td>
+            <td><button onclick='update_lateness("Kokui SELORMEY", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>35</td>
+            <td>Barima TWENEBOAH-KODUAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak35"></td>
+            <td><button onclick='update_lateness("Barima TWENEBOAH-KODUAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>36</td>
+            <td>Ines MUNEZERO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak36"></td>
+            <td><button onclick='update_lateness("Ines MUNEZERO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>37</td>
+            <td>Biniam Kumsa DELESSA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak37"></td>
+            <td><button onclick='update_lateness("Biniam Kumsa DELESSA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>38</td>
+            <td>Naa Kailey ADDO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak38"></td>
+            <td><button onclick='update_lateness("Naa Kailey ADDO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>39</td>
+            <td>Elsie Nana Gyasiwah ARTHUR</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak39"></td>
+            <td><button onclick='update_lateness("Elsie Nana Gyasiwah ARTHUR", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>40</td>
+            <td>Sifen DAMTEW</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak40"></td>
+            <td><button onclick='update_lateness("Sifen DAMTEW", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>41</td>
+            <td>Sanctification Amankwah YEBOAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak41"></td>
+            <td><button onclick='update_lateness("Sanctification Amankwah YEBOAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>42</td>
+            <td>Joshua BENNEH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak42"></td>
+            <td><button onclick='update_lateness("Joshua BENNEH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>43</td>
+            <td>Africa Oforiwaa SAKYI-ADDO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak43"></td>
+            <td><button onclick='update_lateness("Africa Oforiwaa SAKYI-ADDO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>44</td>
+            <td>Justin WULFF-CAESAR</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak44"></td>
+            <td><button onclick='update_lateness("Justin WULFF-CAESAR", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>45</td>
+            <td>Adeline UMUKUNDWA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak45"></td>
+            <td><button onclick='update_lateness("Adeline UMUKUNDWA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>47</td>
+            <td>Sofiat ISMAIL</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak47"></td>
+            <td><button onclick='update_lateness("Sofiat ISMAIL", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>48</td>
+            <td>Yooku ESSAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak48"></td>
+            <td><button onclick='update_lateness("Yooku ESSAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>49</td>
+            <td>Aron KIPRONO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak49"></td>
+            <td><button onclick='update_lateness("Aron KIPRONO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>50</td>
+            <td>Hillary SSEMANDA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak50"></td>
+            <td><button onclick='update_lateness("Hillary SSEMANDA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>51</td>
+            <td>Jayden Kofi Acheampong BOAFO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak51"></td>
+            <td><button onclick='update_lateness("Jayden Kofi Acheampong BOAFO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>52</td>
+            <td>Nenfort Mohammed</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak52"></td>
+            <td><button onclick='update_lateness("Nenfort Mohammed", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>53</td>
+            <td>Carlos Odhiambo OTIENO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak53"></td>
+            <td><button onclick='update_lateness("Carlos Odhiambo OTIENO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>54</td>
+            <td>Mafeng PAM</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak54"></td>
+            <td><button onclick='update_lateness("Mafeng PAM", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>55</td>
+            <td>Richard MADZIYE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak55"></td>
+            <td><button onclick='update_lateness("Richard MADZIYE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>56</td>
+            <td>Ladybird TETTEY</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak56"></td>
+            <td><button onclick='update_lateness("Ladybird TETTEY", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>57</td>
+            <td>Tony OCHIENG</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak57"></td>
+            <td><button onclick='update_lateness("Tony OCHIENG", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>58</td>
+            <td>Lidiya GEMTA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak58"></td>
+            <td><button onclick='update_lateness("Lidiya GEMTA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>59</td>
+            <td>Martin BORAYA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak59"></td>
+            <td><button onclick='update_lateness("Martin BORAYA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>60</td>
+            <td>Nana Akua Afriyie OWUSU</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak60"></td>
+            <td><button onclick='update_lateness("Nana Akua Afriyie OWUSU", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>61</td>
+            <td>Francine NGABIYE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak61"></td>
+            <td><button onclick='update_lateness("Francine NGABIYE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>62</td>
+            <td>Samuel AYITEVIE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak62"></td>
+            <td><button onclick='update_lateness("Samuel AYITEVIE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>63</td>
+            <td>Toluwalase AKANI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak63"></td>
+            <td><button onclick='update_lateness("Toluwalase AKANI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>64</td>
+            <td>Narkie DORH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak64"></td>
+            <td><button onclick='update_lateness("Narkie DORH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>65</td>
+            <td>Moses ADONGO</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak65"></td>
+            <td><button onclick='update_lateness("Moses ADONGO", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>66</td>
+            <td>Lewis BWEBALE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak66"></td>
+            <td><button onclick='update_lateness("Lewis BWEBALE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>67</td>
+            <td>Sylvie ISHIMWE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak67"></td>
+            <td><button onclick='update_lateness("Sylvie ISHIMWE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>68</td>
+            <td>Lydia FRIMPOMAA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak68"></td>
+            <td><button onclick='update_lateness("Lydia FRIMPOMAA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>69</td>
+            <td>Zachary Kwame Gyasi NSIAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak69"></td>
+            <td><button onclick='update_lateness("Zachary Kwame Gyasi NSIAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>70</td>
+            <td>Maltiti Eman WUMBEI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak70"></td>
+            <td><button onclick='update_lateness("Maltiti Eman WUMBEI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>71</td>
+            <td>Makanaka NYATI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak71"></td>
+            <td><button onclick='update_lateness("Makanaka NYATI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>72</td>
+            <td>Raphael SOWAH</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak72"></td>
+            <td><button onclick='update_lateness("Raphael SOWAH", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>73</td>
+            <td>Connel Nukunu Etse AKABA</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak73"></td>
+            <td><button onclick='update_lateness("Connel Nukunu Etse AKABA", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>74</td>
+            <td>Nana Baffour Addo</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak74"></td>
+            <td><button onclick='update_lateness("Nana Baffour Addo", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>75</td>
+            <td>Goodness EMENIKE</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak75"></td>
+            <td><button onclick='update_lateness("Goodness EMENIKE", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>76</td>
+            <td>Lucy LAMPTEY</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak76"></td>
+            <td><button onclick='update_lateness("Lucy LAMPTEY", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>77</td>
+            <td>Jada WULFF-CAESAR</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak77"></td>
+            <td><button onclick='update_lateness("Jada WULFF-CAESAR", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>78</td>
+            <td>Nathaniel ODOI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak78"></td>
+            <td><button onclick='update_lateness("Nathaniel ODOI", "TROJANS")'>Late</button></td>
+          </tr>
+          <tr>
+            <td>79</td>
+            <td>Davina ADJEI</td>
+            <td>MYP4</td>
+            <td>Trojans</td>
+            <td>Nile</td>
+            <td id="ssstreak79"></td>
+            <td><button onclick='update_lateness("Davina ADJEI", "TROJANS")'>Late</button></td>
+          </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script type="application/javascript">
+    function tableSearch() {
+        let input, filter, table, tr, td, txtValue;
+
+        //Intialising Variables
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+    }
+  </script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+apiKey: "AIzaSyDUu__xhKuLzqXnwiDNHvQ66roN6Z_47R0",
+authDomain: "soshgic-hostel-analytica.firebaseapp.com",
+databaseURL: "https://soshgic-hostel-analytica-default-rtdb.firebaseio.com",
+projectId: "soshgic-hostel-analytica",
+storageBucket: "soshgic-hostel-analytica.appspot.com",
+messagingSenderId: "532242787174",
+appId: "1:532242787174:web:fdbef779f67edb733236a7",
+measurementId: "G-XR5JCEH99T"
+          };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // STANDARD FUNCTIONS TO BE CALLED FOR DAILY USE
+    // Update Lateness
+    // Update Streak
+    // Remove streak
+    // Remove Lateness
+
+    // UPDATE STREAK : this will increment the streak by 1
+    function update_streak(student_name, hostel_group) {
+      // First get the current data and add 1
+      console.log(`STUDENTS/${hostel_group}/${student_name}/0/streak`);
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0/streak`)
+        .set(firebase.database.ServerValue.increment(1));
+    }
+    // update_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+
+    // 
+    function show_streak(student_name, hostel_group) {
+      // First get the current data and add 1
+      console.log(`STUDENTS/${hostel_group}/${student_name}/0/streak`);
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0/streak`)
+        .on("value", (sanpshot) => {
+          console.log("Total streak",sanpshot.val())
+          var STREAK_VALUE = sanpshot.val();
+          
+            });
+    }
+    // show_streak("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+
+    // UPDATE LATENESS : this will increment the lateness by 1 and set streak to 0 :( sad!
+
+    function update_lateness(student_name, hostel_group) {
+      // First get the current data and add 1
+      console.log(`STUDENTS/${hostel_group}/${student_name}/0/lateness`);
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0/lateness`)
+        .set(firebase.database.ServerValue.increment(1));
+      //
+      // Now remove all the streak glory here
+      let newupdateddata = {
+        streak: 0,
+      };
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0`)
+        .update(newupdateddata);
+    }
+  //   update_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+
+    // I JUST WANTED TO ADD THIS BECAUSE HGIC STUDENTS CAN GIVE REASONS FOR BEING LATE SO JUST TO REMOVE THE LATENESS
+    // BUT THE STREAK WILL BE LOST UNLESS I ADD IT MANUALLY
+    
+    function remove_lateness(student_name, hostel_group) {
+      // First get the current data and add 1
+      console.log(`STUDENTS/${hostel_group}/${student_name}/0/lateness`);
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0/lateness`)
+        .set(firebase.database.ServerValue.increment(-1));
+      //
+      // Now remove all the streak glory here
+      let newupdateddata = {
+        streak: 1,
+      };
+      firebase
+        .database()
+        .ref(`STUDENTS/${hostel_group}/${student_name}/0`)
+        .update(newupdateddata);
+    }
+    // remove_lateness("Aaron Lovelace Nana Kwasi Abayie PREMPEH", "TITANS");
+
+
+    show_streak("Doris MWIHAKI", "TROJANS", "ssstreak1");
+    show_streak("Jude ANNAN", "TROJANS", "ssstreak2");
+    show_streak("Andrew Nana Kwadwo ASAMOAH BOATENG", "TROJANS", "ssstreak3");
+    show_streak("Adomba MORGAN-ASIEDU", "TROJANS", "ssstreak4");
+    show_streak("Brianna BAMPOE ADDO", "TROJANS", "ssstreak5");
+    show_streak("Nadine Louise WULFF-CAESAR", "TROJANS", "ssstreak6");
+    show_streak("Daniella DICKSON", "TROJANS", "ssstreak7");
+    show_streak("Priscilla FREEMAN", "TROJANS", "ssstreak8");
+    show_streak("Keli Nana Akua OPPONG-AMPOFO", "TROJANS", "ssstreak9");
+    show_streak("Jephter FRIMPONG", "TROJANS", "ssstreak10");
+    show_streak("Kwame Boakye BRUKU-BOATENG", "TROJANS", "ssstreak11");
+    show_streak("Kojo APPEAGYEI", "TROJANS", "ssstreak12");
+    show_streak("Innocent GASHEMA", "TROJANS", "ssstreak13");
+    show_streak("Ewura Amma Panyin Acquabaa Korantema ANSAH", "TROJANS", "ssstreak14");
+    show_streak("Seidu KABORE", "TROJANS", "ssstreak15");
+    show_streak("Talent MOYO", "TROJANS", "ssstreak16");
+    show_streak("Magdaline DARKO", "TROJANS", "ssstreak17");
+    show_streak("Asabea OWUSU-KORANTENG", "TROJANS", "ssstreak18");
+    show_streak("Lifi Sesi Afua KWETEY", "TROJANS", "ssstreak19");
+    show_streak("Flavia NANSANI", "TROJANS", "ssstreak20");
+    show_streak("Joseph Jnr Nsuremaya ABOR", "TROJANS", "ssstreak21");
+    show_streak("Robert Kofi Adjei Sika ACKAH", "TROJANS", "ssstreak22");
+    show_streak("Parfait Leonald NIYONZIMA", "TROJANS", "ssstreak23");
+    show_streak("Ivine Jepkoech KURGAT", "TROJANS", "ssstreak24");
+    show_streak("Edith ACCAM", "TROJANS", "ssstreak25");
+    show_streak("Naa Adjorkor ANANG-LA", "TROJANS", "ssstreak26");
+    show_streak("Nana Kwasi Opoku AGYEMAN", "TROJANS", "ssstreak27");
+    show_streak("Nana Osafoaa ASUMANG", "TROJANS", "ssstreak28");
+    show_streak("Kofi ANOKURANG-BUDU", "TROJANS", "ssstreak29");
+    show_streak("Joshua Kojo ASAMOAH", "TROJANS", "ssstreak30");
+    show_streak("Tony Odhiambo KERE", "TROJANS", "ssstreak31");
+    show_streak("Wiredu OBENG", "TROJANS", "ssstreak32");
+    show_streak("Sandra NAMAGANDA", "TROJANS", "ssstreak33");
+    show_streak("Kokui SELORMEY", "TROJANS", "ssstreak34");
+    show_streak("Barima TWENEBOAH-KODUAH", "TROJANS", "ssstreak35");
+    show_streak("Ines MUNEZERO", "TROJANS", "ssstreak36");
+    show_streak("Biniam Kumsa DELESSA", "TROJANS", "ssstreak37");
+    show_streak("Naa Kailey ADDO", "TROJANS", "ssstreak38");
+    show_streak("Elsie Nana Gyasiwah ARTHUR", "TROJANS", "ssstreak39");
+    show_streak("Sifen DAMTEW", "TROJANS", "ssstreak40");
+    show_streak("Sanctification Amankwah YEBOAH", "TROJANS", "ssstreak41");
+    show_streak("Joshua BENNEH", "TROJANS", "ssstreak42");
+    show_streak("Africa Oforiwaa SAKYI-ADDO", "TROJANS", "ssstreak43");
+    show_streak("Justin WULFF-CAESAR", "TROJANS", "ssstreak44");
+    show_streak("Adeline UMUKUNDWA", "TROJANS", "ssstreak45");
+    show_streak("Sofiat ISMAIL", "TROJANS", "ssstreak47");
+    show_streak("Yooku ESSAH", "TROJANS", "ssstreak48");
+    show_streak("Aron KIPRONO", "TROJANS", "ssstreak49");
+    show_streak("Hillary SSEMANDA", "TROJANS", "ssstreak50");
+    show_streak("Jayden Kofi Acheampong BOAFO", "TROJANS", "ssstreak51");
+    show_streak("Nenfort Mohammed", "TROJANS", "ssstreak52");
+    show_streak("Carlos Odhiambo OTIENO", "TROJANS", "ssstreak53");
+    show_streak("Mafeng PAM", "TROJANS", "ssstreak54");
+    show_streak("Richard MADZIYE", "TROJANS", "ssstreak55");
+    show_streak("Ladybird TETTEY", "TROJANS", "ssstreak56");
+    show_streak("Tony OCHIENG", "TROJANS", "ssstreak57");
+    show_streak("Lidiya GEMTA", "TROJANS", "ssstreak58");
+    show_streak("Martin BORAYA", "TROJANS", "ssstreak59");
+    show_streak("Nana Akua Afriyie OWUSU", "TROJANS", "ssstreak60");
+    show_streak("Francine NGABIYE", "TROJANS", "ssstreak61");
+    show_streak("Samuel AYITEVIE", "TROJANS", "ssstreak62");
+    show_streak("Toluwalase AKANI", "TROJANS", "ssstreak63");
+    show_streak("Narkie DORH", "TROJANS", "ssstreak64");
+    show_streak("Moses ADONGO", "TROJANS", "ssstreak65");
+    show_streak("Lewis BWEBALE", "TROJANS", "ssstreak66");
+    show_streak("Sylvie ISHIMWE", "TROJANS", "ssstreak67");
+    show_streak("Lydia FRIMPOMAA", "TROJANS", "ssstreak68");
+    show_streak("Zachary Kwame Gyasi NSIAH", "TROJANS", "ssstreak69");
+    show_streak("Maltiti Eman WUMBEI", "TROJANS", "ssstreak70");
+    show_streak("Makanaka NYATI", "TROJANS", "ssstreak71");
+    show_streak("Raphael SOWAH", "TROJANS", "ssstreak72");
+    show_streak("Connel Nukunu Etse AKABA", "TROJANS", "ssstreak73");
+    show_streak("Nana Baffour Addo", "TROJANS", "ssstreak74");
+    show_streak("Goodness EMENIKE", "TROJANS", "ssstreak75");
+    show_streak("Lucy LAMPTEY", "TROJANS", "ssstreak76");
+    show_streak("Jada WULFF-CAESAR", "TROJANS", "ssstreak77");
+    show_streak("Nathaniel ODOI", "TROJANS", "ssstreak78");
+    show_streak("Davina ADJEI", "TROJANS", "ssstreak79");
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+</html>
